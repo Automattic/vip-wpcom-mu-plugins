@@ -35,8 +35,8 @@ add_filter( 'alloptions', 'sanity_check_alloptions' );
 
 function sanity_check_alloptions_die( $size, $alloptions ) {
 	sanity_check_alloptions_notify( $size, $alloptions, true );
-	?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11">
+	?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml"><head profile="//gmpg.org/xfn/11">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Something went wrong &#8212; Option Error</title>
 <style type="text/css">
