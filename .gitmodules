@@ -1,0 +1,16 @@
+[submodule "jetpack"]
+	path = jetpack
+	url = https://github.com/Automattic/jetpack.git
+	branch = master-stable
+[submodule "media-explorer"]
+	path = media-explorer
+	url = https://github.com/Automattic/media-explorer.git
+[submodule "writing-helper"]
+	path = writing-helper
+	url = https://github.com/Automattic/writing-helper.git
+[submodule "amp-wp"]
+	path = amp-wp
+	url = https://github.com/Automattic/amp-wp.git
+[submodule "Rewrite-Rules-Inspector"]
+	path = Rewrite-Rules-Inspector
+	url = https://github.com/Automattic/Rewrite-Rules-Inspector.git
