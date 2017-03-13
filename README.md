@@ -16,8 +16,8 @@ This repo will help bridge the gap between WordPress.com VIP and your local deve
 WordPress.com uses Batcache for page caching. The code is included here, but requires some setup:
 
 1. Install the Memcached backend
-1. Copy or symlink advanced-cache.php to `/wp-content`
-1. Turn on WP_CACHE, with `define('WP_CACHE', true);`
+1. Copy or symlink `batcache/advanced-cache.php` to `/wp-content`
+1. Turn on `WP_CACHE`, with `define('WP_CACHE', true);`
 
 ## Concatention
 
