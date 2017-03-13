@@ -22,7 +22,7 @@ WordPress.com uses Batcache for page caching. The code is included here, but req
 1. Copy or symlink `batcache/advanced-cache.php` to `/wp-content`
 1. Turn on `WP_CACHE`, with `define('WP_CACHE', true);`
 
-## Concatention
+## Concatenation
 
 To enable nginx-http-concat, you'll need to define the `QUICKSTART_ENABLE_CONCAT` constant in `wp-config.php` and add the relevant configuration to your webserver. For example, in Nginx:
 
