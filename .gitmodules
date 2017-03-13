@@ -17,3 +17,6 @@
 [submodule "http-concat"]
 	path = http-concat
 	url = https://github.com/Automattic/nginx-http-concat.git
+[submodule "batcache"]
+	path = batcache
+	url = https://github.com/Automattic/batcache.git

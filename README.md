@@ -11,6 +11,14 @@ This repo will help bridge the gap between WordPress.com VIP and your local deve
 * Protected Embeds
 * ...
 
+## Batcache
+
+WordPress.com uses Batcache for page caching. The code is included here, but requires some setup:
+
+1. Install the Memcached backend
+1. Copy or symlink advanced-cache.php to `/wp-content`
+1. Turn on WP_CACHE, with `define('WP_CACHE', true);`
+
 ## Concatention
 
 To enable nginx-http-concat, you'll need to define the `QUICKSTART_ENABLE_CONCAT` constant in `wp-config.php` and add the relevant configuration to your webserver. For example, in Nginx:
