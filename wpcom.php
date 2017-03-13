@@ -1,10 +1,8 @@
 <?php
 
-if ( defined( 'SUBDOMAIN_INSTALL' ) && SUBDOMAIN_INSTALL || 1 === get_current_blog_id() ) {
-    if ( ! defined( 'QUICKSTART_DISABLE_CONCAT' ) || ! QUICKSTART_DISABLE_CONCAT ) {
+if ( defined( 'QUICKSTART_ENABLE_CONCAT' ) && QUICKSTART_ENABLE_CONCAT ) {
 	require __DIR__ . '/http-concat/cssconcat.php';
 	require __DIR__ . '/http-concat/jsconcat.php';
-    }
 }
 
 // Add X-hacker header

@@ -14,3 +14,6 @@
 [submodule "Rewrite-Rules-Inspector"]
 	path = Rewrite-Rules-Inspector
 	url = https://github.com/Automattic/Rewrite-Rules-Inspector.git
+[submodule "http-concat"]
+	path = http-concat
+	url = https://github.com/Automattic/nginx-http-concat.git
