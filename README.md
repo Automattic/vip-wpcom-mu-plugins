@@ -2,7 +2,14 @@
 
 ## Usage
 
-Install this directory to `wp-content/mu-plugins` in your local development environment.
+Install this directory to `wp-content/mu-plugins` in your local development environment. Full setup instructions can be [found here](http://wp.me/p9nvA-75T).
+
+## Differences
+
+This repo will help bridge the gap between WordPress.com VIP and your local development environment but will not provide a 1:1 setup. Some known missing pieces include:
+
+* Protected Embeds
+* ...
 
 ## Concatention
 
