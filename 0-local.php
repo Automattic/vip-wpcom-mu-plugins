@@ -6,4 +6,6 @@ if ( ! defined( 'WP_DEBUG' ) ) {
 }
 
 // https://jetpack.com/support/development-mode/
-define( 'JETPACK_DEV_DEBUG', true );
+if ( ! defined( 'JETPACK_DEV_DEBUG' ) ) {
+	define( 'JETPACK_DEV_DEBUG', true );
+}
