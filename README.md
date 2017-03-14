@@ -1,5 +1,7 @@
 # VIP (WPCOM) mu-plugins
 
+[![Build Status](https://travis-ci.org/Automattic/vip-wpcom-mu-plugins.svg?branch=master)](https://travis-ci.org/Automattic/vip-wpcom-mu-plugins)
+
 ## Usage
 
 Install this directory to `wp-content/mu-plugins` in your local development environment. Full setup instructions can be [found here](http://wp.me/p9nvA-75T).
