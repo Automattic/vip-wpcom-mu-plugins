@@ -1,1 +1,0 @@
-amp-wp/amp.php
