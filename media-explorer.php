@@ -1,1 +1,0 @@
-media-explorer/media-explorer.php

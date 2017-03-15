@@ -1,1 +1,0 @@
-Rewrite-Rules-Inspector/rewrite-rules-inspector.php
