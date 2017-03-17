@@ -32,6 +32,6 @@ To enable nginx-http-concat, you'll need to define the `QUICKSTART_ENABLE_CONCAT
 location /_static/ {
         fastcgi_pass unix:/var/run/fastcgi.sock;
         include /etc/nginx/fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root/wp-content/plugins/http-concat/ngx-http-concat.php;
+        fastcgi_param SCRIPT_FILENAME $document_root/wp-content/mu-plugins/http-concat/ngx-http-concat.php;
 }
 ```
