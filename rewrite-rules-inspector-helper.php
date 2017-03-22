@@ -51,12 +51,12 @@ function rri_wpcom_action_switch_theme( $new_name ) {
  */
 function wpcom_vip_handle_flush_rewrite_rules() {
 
-	if ( ! isset( $_GET['action'] ) || ! $_GET['action'] == 'wpcom-vip-flush-rewrite-rules' ) {
+	if ( ! isset( $_GET['action'] ) || 'wpcom-vip-flush-rewrite-rules' !== $_GET['action'] ) {
 		return;
 	}
 
 	// Pass the secret key check
-	if ( ! isset( $_GET['secret'] ) || $_GET['secret'] != WPCOM_VIP_FLUSH_REWRITE_RULES_SECRET ) {
+	if ( ! isset( $_GET['secret'] ) || WPCOM_VIP_FLUSH_REWRITE_RULES_SECRET !== $_GET['secret'] ) {
 		return;
 	}
 
@@ -84,7 +84,7 @@ function wpcom_vip_handle_flush_rewrite_rules() {
 	$wp_rewrite->rewrite_rules();
 	update_option( 'rewrite_rules', $wp_rewrite->rules );
 
-	wp_die( __( 'Rewrite rules have been flushed for ' . get_site_url() ) );
+	wp_die( esc_html( sprintf( __( 'Rewrite rules have been flushed for %s' ), get_site_url() ) ) );
 	exit;
 }
 add_action( 'init', 'wpcom_vip_handle_flush_rewrite_rules', 99999 );
