@@ -26,18 +26,18 @@ add_filter( 'global_terms_enabled', '__return_false' );
 
 // Disable automatic creation of intermediate images
 add_filter( 'intermediate_image_sizes', 'wpcom_intermediate_sizes' );
-function wpcom_intermediate_sizes ( $sizes ) {
-    if ( ! defined( 'JETPACK_DEV_DEBUG' ) || ! JETPACK_DEV_DEBUG ) {
+function wpcom_intermediate_sizes( $sizes ) {
+	if ( ! defined( 'JETPACK_DEV_DEBUG' ) || ! JETPACK_DEV_DEBUG ) {
 	    return array();
-    }
+	}
 
-    return $sizes;
+	return $sizes;
 }
 
 // Check alloptions on every pageload
 add_action( 'init', function() {
-    $alloptions = wp_cache_get( 'alloptions', 'options' );
-    $alloptions = apply_filters( 'alloptions', $alloptions );
+	$alloptions = wp_cache_get( 'alloptions', 'options' );
+	$alloptions = apply_filters( 'alloptions', $alloptions );
 });
 
 // Load wpcom global.css
@@ -49,8 +49,9 @@ function global_css() {
 	// wp_head action + echo are used instead of wp_enqueue_style, because these stylesheets must be loaded before the others
 	wp_enqueue_style( 'h4-global', esc_url( $scheme . '://s0.wp.com/wp-content/themes/h4/global.css' ), array() );
 
-	if ( is_rtl() )
+	if ( is_rtl() ) {
 		wp_enqueue_style( 'h4-global-rtl', esc_url( $scheme . '://s0.wp.com/wp-content/themes/h4/global-rtl.css' ), array() );
+	}
 }
 
 function wpcom_force_ssl_home_urls_in_content_when_secure( $content ) {
@@ -78,28 +79,28 @@ wp_oembed_add_provider(
  * Load a WordPress.com theme compat file, if it exists.
  */
 function wpcom_load_theme_compat_file() {
-    if ( ( ! defined( 'WP_INSTALLING' ) || 'wp-activate.php' === $GLOBALS['pagenow'] ) ) {
-	// Many wpcom.php files call $themecolors directly. Ease the pain.
-	global $themecolors;
+	if ( ( ! defined( 'WP_INSTALLING' ) || 'wp-activate.php' === $GLOBALS['pagenow'] ) ) {
+		// Many wpcom.php files call $themecolors directly. Ease the pain.
+		global $themecolors;
 
-	$template_path   = get_template_directory();
-	$stylesheet_path = get_stylesheet_directory();
-	$file            = '/inc/wpcom.php';
+		$template_path   = get_template_directory();
+		$stylesheet_path = get_stylesheet_directory();
+		$file            = '/inc/wpcom.php';
 
-	// Look also in /includes as alternate location, since premium theme partners may use that convention.
-	if ( ! file_exists( $template_path . $file ) && ! file_exists( $stylesheet_path . $file ) ) {
-	    $file = '/includes/wpcom.php';
+		// Look also in /includes as alternate location, since premium theme partners may use that convention.
+		if ( ! file_exists( $template_path . $file ) && ! file_exists( $stylesheet_path . $file ) ) {
+			$file = '/includes/wpcom.php';
+		}
+
+		// Include 'em. Child themes first, just like core.
+		if ( $template_path !== $stylesheet_path && file_exists( $stylesheet_path . $file ) ) {
+			include_once( $stylesheet_path . $file );
+		}
+
+		if ( file_exists( $template_path . $file ) ) {
+			include_once( $template_path . $file );
+		}
 	}
-
-	// Include 'em. Child themes first, just like core.
-	if ( $template_path !== $stylesheet_path && file_exists( $stylesheet_path . $file ) ) {
-	    include_once( $stylesheet_path . $file );
-	}
-
-	if ( file_exists( $template_path . $file ) ) {
-	    include_once( $template_path . $file );
-	}
-    }
 }
 // Hook early so that after_setup_theme can still be used at default priority.
 add_action( 'after_setup_theme', 'wpcom_load_theme_compat_file', 0 );
@@ -131,13 +132,16 @@ function wpcom_reserved_page_slugs( $is_reserved, $slug, $post_type ) {
 		'wlw',
 		'wp-admin',
 		'wp-content',
-		'wp-includes'
+		'wp-includes',
 	);
 
-	$available_custom_post_types = get_post_types( array( 'public' => true, '_builtin' => false ) );
+	$available_custom_post_types = get_post_types( array(
+		'public' => true,
+		'_builtin' => false,
+	) );
 
 	if ( ! empty( $available_custom_post_types ) ) {
-		foreach( $available_custom_post_types as $acpt ) {
+		foreach ( $available_custom_post_types as $acpt ) {
 			$cpt_obj = get_post_type_object( $acpt );
 
 			if ( ! empty( $cpt_obj ) && isset( $cpt_obj->rewrite ) && isset( $cpt_obj->rewrite['slug'] ) ) {

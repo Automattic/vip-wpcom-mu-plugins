@@ -7,15 +7,18 @@ define( 'WPCOM_VIP_FLUSH_REWRITE_RULES_SECRET', 'NjI5NzU3MjZkNTcwZGNkY2I0MDNiNTc
  */
 function wpcom_initiate_flush_rewrite_rules( $_blog_id = null ) {
 
-	if ( is_null( $_blog_id ) )
+	if ( is_null( $_blog_id ) ) {
 		$_blog_id = get_current_blog_id();
+	}
 
 	$args = array(
 		'action' => 'wpcom-vip-flush-rewrite-rules',
 		'secret' => WPCOM_VIP_FLUSH_REWRITE_RULES_SECRET,
 		);
 	$request_url = add_query_arg( $args, get_home_url( $_blog_id ) );
-	wp_remote_get( $request_url, array( 'blocking' => false ) );
+	wp_remote_get( $request_url, array(
+		'blocking' => false,
+	) );
 }
 
 /**
@@ -33,8 +36,9 @@ function wpcom_theme_has_custom_rewrite_rules( $stylesheet = null ) {
 add_action( 'switch_theme', 'rri_wpcom_action_switch_theme' );
 function rri_wpcom_action_switch_theme( $new_name ) {
 
-	if ( !wpcom_theme_has_custom_rewrite_rules() )
+	if ( ! wpcom_theme_has_custom_rewrite_rules() ) {
 		return;
+	}
 
 	wpcom_initiate_flush_rewrite_rules();
 }
@@ -47,12 +51,14 @@ function rri_wpcom_action_switch_theme( $new_name ) {
  */
 function wpcom_vip_handle_flush_rewrite_rules() {
 
-	if ( ! isset( $_GET['action'] ) || ! $_GET['action'] == 'wpcom-vip-flush-rewrite-rules' )
+	if ( ! isset( $_GET['action'] ) || ! $_GET['action'] == 'wpcom-vip-flush-rewrite-rules' ) {
 		return;
+	}
 
 	// Pass the secret key check
-	if ( !isset( $_GET['secret' ] ) || $_GET['secret'] != WPCOM_VIP_FLUSH_REWRITE_RULES_SECRET )
+	if ( ! isset( $_GET['secret'] ) || $_GET['secret'] != WPCOM_VIP_FLUSH_REWRITE_RULES_SECRET ) {
 		return;
+	}
 
 	global $wp_rewrite;
 
@@ -65,8 +71,9 @@ function wpcom_vip_handle_flush_rewrite_rules() {
 	 */
 	if ( ( defined( 'WPCOM_VIP_CUSTOM_PERMALINKS' ) && WPCOM_VIP_CUSTOM_PERMALINKS )
 		|| ( defined( 'WPCOM_VIP_CUSTOM_CATEGORY_BASE' ) && WPCOM_VIP_CUSTOM_CATEGORY_BASE )
-		|| ( defined( 'WPCOM_VIP_CUSTOM_TAG_BASE' ) && WPCOM_VIP_CUSTOM_TAG_BASE ) )
+		|| ( defined( 'WPCOM_VIP_CUSTOM_TAG_BASE' ) && WPCOM_VIP_CUSTOM_TAG_BASE ) ) {
 		wpcom_vip_refresh_wp_rewrite();
+	}
 
 	/**
 	 * We can't use flush_rewrite_rules( false ) in this context because
@@ -101,7 +108,7 @@ function wpcom_vip_refresh_wp_rewrite() {
 		'category_base' => '',
 		'tag_base' => '',
 		);
-	foreach( $permastructs as $option_key => $default_value ) {
+	foreach ( $permastructs as $option_key => $default_value ) {
 		$filter = 'pre_option_' . $option_key;
 		$callback = '_wpcom_vip_filter_' . $option_key;
 
@@ -109,16 +116,17 @@ function wpcom_vip_refresh_wp_rewrite() {
 
 		$reapply = has_filter( $filter, $callback );
 		// If this value isn't filtered by the VIP, used the default wpcom value
-		if ( !$reapply )
+		if ( ! $reapply ) {
 			$option_value = $default_value;
-		else
-			remove_filter( $filter, $callback, 99 );
+		} else { remove_filter( $filter, $callback, 99 );
+		}
 		// Save the precious
 		update_option( $option_key, $option_value );
 		// Only reapply the filter if it was applied previously
 		// as it overrides the option value with a global variable
-		if ( $reapply )
+		if ( $reapply ) {
 			add_filter( $filter, $callback, 99 );
+		}
 	}
 
 	// Reconstruct WP_Rewrite and make sure we persist any custom endpoints, etc.
@@ -128,11 +136,11 @@ function wpcom_vip_refresh_wp_rewrite() {
 		'non_wp_rules',
 		'endpoints',
 		);
-	foreach( $custom_rules as $key ) {
-		$old_values[$key] = $wp_rewrite->$key;
+	foreach ( $custom_rules as $key ) {
+		$old_values[ $key ] = $wp_rewrite->$key;
 	}
 	$wp_rewrite->init();
-	foreach( $custom_rules as $key ) {
-		$wp_rewrite->$key = array_merge( $old_values[$key], $wp_rewrite->$key );
+	foreach ( $custom_rules as $key ) {
+		$wp_rewrite->$key = array_merge( $old_values[ $key ], $wp_rewrite->$key );
 	}
 }

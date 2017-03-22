@@ -11,20 +11,20 @@ add_filter( 'upload_size_limit', function() {
 });
 
 // No upload limit for VIPs
-add_filter( 'pre_site_option_upload_space_check_disabled', function(){
+add_filter( 'pre_site_option_upload_space_check_disabled', function() {
 	return 1;
 });
 
 // Use VIP Theme Review by default
 add_filter( 'vip_scanner_default_review', function( $default, $review_types ) {
-  return array_search( 'VIP Theme Review', $review_types );
+	return array_search( 'VIP Theme Review', $review_types );
 }, 10, 2 );
 
 // Submit themes to VIP support
 add_filter( 'vip_scanner_email_to', 'vip_scanner_email_to' );
 function vip_scanner_email_to() {
-  // Disabled email submission.
-  // return 'vip-support@wordpress.com';
+	// Disabled email submission.
+	// return 'vip-support@wordpress.com';
 }
 
 /**

@@ -2,33 +2,36 @@
 
 function sanity_check_alloptions( $alloptions ) {
 
-	if ( defined( 'WP_CLI' ) && WP_CLI )
+	if ( defined( 'WP_CLI' ) && WP_CLI ) {
 		return $alloptions;
+	}
 
 	// Warn should *always* be =< die
-	$alloptions_size_warn  =  750000;
+	$alloptions_size_warn  = 750000;
 	$alloptions_size_die   = 1000000; // 1000000 ~ 1MB, too big for memcache
-	
+
 	static $alloptions_size = null; // Avoids repeated cache requests
-	if ( !$alloptions_size )
+	if ( ! $alloptions_size ) {
 		$alloptions_size = wp_cache_get( 'alloptions_size' );
-	
+	}
+
 	if ( $alloptions_size > $alloptions_size_die ) {
 		sanity_check_alloptions_die( $alloptions_size, $alloptions );
 	}
-	
-	if ( !$alloptions_size ) {
+
+	if ( ! $alloptions_size ) {
 		$alloptions_size = strlen( serialize( $alloptions ) );
 		wp_cache_add( 'alloptions_size', $alloptions_size, '', 60 );
 		if ( $alloptions_size > $alloptions_size_warn ) {
-			if ( $alloptions_size > $alloptions_size_die )
+			if ( $alloptions_size > $alloptions_size_die ) {
 				sanity_check_alloptions_die( $alloptions_size, $alloptions );
-				
+			}
+
 			// Warn if we haven't died already
 			sanity_check_alloptions_notify( $alloptions_size, $alloptions );
 		}
 	}
-	
+
 	return $alloptions;
 }
 add_filter( 'alloptions', 'sanity_check_alloptions' );
@@ -82,16 +85,18 @@ function sanity_check_alloptions_notify( $size, $alloptions, $blocked = false ) 
 	global $wpdb, $current_blog;
 
 	// Rate limit the alerts to avoid flooding
-	if ( false !== wp_cache_get( 'alloptions', 'throttle' ) )
+	if ( false !== wp_cache_get( 'alloptions', 'throttle' ) ) {
 		return;
+	}
 
 	wp_cache_add( 'alloptions', 1, 'throttle', 5 * MINUTE_IN_SECONDS );
 
-	if ( $blocked )
-		$msg = "This site is now BLOCKED from loading until option sizes are under control.";
-	else
-		$msg = "Site will be blocked from loading if option sizes get too much bigger.";
+	if ( $blocked ) {
+		$msg = 'This site is now BLOCKED from loading until option sizes are under control.';
+	} else {
+		$msg = 'Site will be blocked from loading if option sizes get too much bigger.';
+	}
 
-	$log = esc_url( $_SERVER['HTTP_HOST'] ) . " - {$wpdb->blogid} options is up to " . number_format( $size ) . ' ' . $msg . ' #vipoptions'; 
+	$log = esc_url( $_SERVER['HTTP_HOST'] ) . " - {$wpdb->blogid} options is up to " . number_format( $size ) . ' ' . $msg . ' #vipoptions';
 	error_log( $log );
 }
