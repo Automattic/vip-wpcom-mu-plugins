@@ -4,7 +4,7 @@
 
 ## Usage
 
-Install this directory to `wp-content/mu-plugins` in your local development environment. Full setup instructions can be [found here](http://wp.me/p9nvA-75T).
+Install this directory to `wp-content/mu-plugins` in your local development environment. Current WordPress.com VIP Clients will find full setup instructions in the [VIP Lobby](https://wp.me/PPtWC-2T').
 
 ## Differences
 
