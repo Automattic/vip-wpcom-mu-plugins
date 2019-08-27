@@ -1,7 +1,7 @@
 [submodule "jetpack"]
 	path = jetpack
 	url = https://github.com/Automattic/jetpack.git
-	branch = master-stable
+	branch = branch-7.6-built
 [submodule "media-explorer"]
 	path = media-explorer
 	url = https://github.com/Automattic/media-explorer.git
