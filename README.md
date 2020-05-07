@@ -1,6 +1,6 @@
-# VIP (WPCOM) mu-plugins
+# DEPRECATED
 
-[![Build Status](https://travis-ci.org/Automattic/vip-wpcom-mu-plugins.svg?branch=master)](https://travis-ci.org/Automattic/vip-wpcom-mu-plugins)
+This repo is no longer actively being maintained.
 
 ## Usage
 
